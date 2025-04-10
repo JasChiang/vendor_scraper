@@ -148,13 +148,14 @@ def scrape_vendor_list(page_num=1):
             # Get vendor name and website from detail page
             vendor_name, official_website = get_vendor_info(detail_url)
             
-            if vendor_name and official_website:
+            # Include all vendors, even if they don't have a website URL
+            if vendor_name:
                 vendors.append({
                     'vendor_name': vendor_name,
-                    'official_website': official_website
+                    'official_website': official_website if official_website else ""
                 })
                 
-                print(f"Scraped: {vendor_name} | Website: {official_website}")
+                print(f"Scraped: {vendor_name} | Website: {official_website if official_website else 'N/A'}")
             
             # Add a small delay to avoid overloading the server
             time.sleep(1)
